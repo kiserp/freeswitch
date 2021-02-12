@@ -5814,7 +5814,7 @@ SWITCH_STANDARD_API(show_function)
 											    "from channels a \n"
 											    "left join calls c on a.uuid = c.caller_uuid and a.hostname = c.hostname \n"
 											    "left join channels b on b.uuid = c.callee_uuid and b.hostname = c.hostname \n"
-											    "where hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls)) \n"
+											    "where c.hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls)) \n"
 											    "order by call_created_epoch  ;", switch_core_get_switchname());
 			if (argv[1] && !strcasecmp(argv[1], "count")) {
 				switch_snprintfv(sql, sizeof(sql), "select count(*) \n" 
@@ -5915,7 +5915,7 @@ SWITCH_STANDARD_API(show_function)
 												"from channels a \n"
 												"left join calls c on a.uuid = c.caller_uuid and a.hostname = c.hostname \n"
 												"left join channels b on b.uuid = c.callee_uuid and b.hostname = c.hostname \n"
-												"where  hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls))\n"
+												"where  c.hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls))\n"
 												"order by call_created_epoch  ;\n", switch_core_get_switchname());
 			if (argv[2] && !strcasecmp(argv[1], "as")) {
 				as = argv[2];
@@ -5990,7 +5990,7 @@ SWITCH_STANDARD_API(show_function)
 											   "from channels a \n"
 											   "left join calls c on a.uuid = c.caller_uuid and a.hostname = c.hostname \n"
 											   "left join channels b on b.uuid = c.callee_uuid and b.hostname = c.hostname \n"
-											   "where b_uuid is not null and hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls)) \n"
+											   "where b.uuid is not null and c.hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls)) \n"
 											   "order by call_created_epoch  ;", switch_core_get_switchname());
 			if (argv[2] && !strcasecmp(argv[1], "as")) {
 				as = argv[2];
@@ -6042,7 +6042,7 @@ SWITCH_STANDARD_API(show_function)
 									"from channels a \n"
 									"left join calls c on a.uuid = c.caller_uuid and a.hostname = c.hostname \n"
 									"left join channels b on b.uuid = c.callee_uuid and b.hostname = c.hostname \n"
-									"where b_uuid is not null and  hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls))\n"
+									"where b.uuid is not null and  c.hostname='%q' and (a.uuid = c.caller_uuid or a.uuid not in (select callee_uuid from calls))\n"
 									"order by call_created_epoch  ;"
 								, switch_core_get_switchname());
 			if (argv[2] && !strcasecmp(argv[1], "as")) {
